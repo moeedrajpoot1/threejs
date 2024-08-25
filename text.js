@@ -23,28 +23,44 @@ const object= new THREE.Mesh(geometry,material)
 ///////// font 
 const fontloader = new FontLoader();
 fontloader.load('fonts/Manrope Medium_Regular.json',(font)=>{
-    const textgeometry=new TextGeometry('Hello World InshaAllah i will be a developer',{
+    const textgeometry=new TextGeometry('Hello World ',{
 font: font,
 		size: 0.5,
 		depth: 0.2,
-		curveSegments: 12,
+		curveSegments: 17,
 		bevelEnabled: true,
 		bevelThickness: 0.3,
-		bevelSize: 0.03,
+		bevelSize: 0.02,
 		bevelOffset: 0,
-		bevelSegments: 5
+		bevelSegments: 9
 
 
     })
-    const textMaterial=new THREE.MeshBasicMaterial()
+    const textMaterial=new THREE.MeshNormalMaterial()
+    // textMaterial.wireframe=true
+    const text=new THREE.Mesh(textgeometry,textMaterial)
+	// for store the words in box so that we can use from the middle rotation
+	// textgeometry.computeBoundingBox()
+	// textgeometry.translate(
+	// 	-(textgeometry.boundingBox.max.x-0.02)*0.5,
+	// 	-(textgeometry.boundingBox.max.y-0.02)*0.5,
+	// 	-(textgeometry.boundingBox.max.z-0.3)*0.5,
+		
+	// )
+	textgeometry.center()
+	scene.add(text)
+
 }
 
 )
 
+//for middle rotation
+
+// const axeshelper=new THREE.AxesHelper()
+// scene.add(axeshelper)
 
 
-
-scene.add(object)
+// scene.add(object)
 camera.position.z = 5;
 
 const tick=()=>{
